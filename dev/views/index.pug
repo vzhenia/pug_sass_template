@@ -1,0 +1,25 @@
+doctype html
+html
+  include includes/head.pug
+
+  body
+    block mainContent
+    
+    //- Example of horisontal stacked barchart
+    - for(let i=0;i<5;i++){
+      div.container
+         div(class="inline tile-orange-"+i)
+         div(class="inline tile-green-"+i)
+      - }
+      
+    //- Lists, objects, iteration, interpolation
+    //- interpolation is different for attributes and content
+    - const lst = [{'num': 1, 'val':'home'},{'num': 2, 'val':'work'},{'num': 3, 'val':'theatre'}]
+    each elt, index in lst
+       button(class='btn-'+elt.num) hello man #{index} #{elt.val}
+
+
+
+       
+       
+    

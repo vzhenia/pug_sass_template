@@ -1,0 +1,79 @@
+$baseColor: black;
+$secondColor: mediumpurple;
+$textColor: yellow;
+$greenColor: lime;
+$maxTileWidth: 350px;
+$a-tags: 'a, a:active, a:hover, a:visited';
+$a-tags-hover: 'a:hover, a:active';
+
+#{$a-tags} {
+  color: purple;
+  text-decoration: none;
+  margin-left: 5px;
+  display: block;
+}
+#{$a-tags-hover} {
+  color: $baseColor;
+}
+.tile {
+  height: 30px;
+  margin: 1px;
+  white-space: nowrap;
+  transition: 0.5s all ease;
+  color: $textColor;
+  font-weight: 700;
+}
+.container{
+  background-color: $baseColor;
+  border: 1px solid $secondColor;
+  .inline{
+    display: inline-block;
+  }
+}
+
+@for $i from 0 through 5 {
+  $randomWidthOrange: #{random(200)}px;
+  $randomWidthGreen: #{random(100)}px;
+  .tile-orange-#{$i} {
+    @extend .tile;
+    $col: $secondColor;
+    background-color: transparentize($col, $i/6);
+    width: $randomWidthOrange;
+    &:after {
+      content: '#{$i}';
+    }
+    &:hover {
+      background-color: saturate($col, 20%);
+    }
+  }
+  .tile-green-#{$i} {
+    @extend .tile;
+    $col: $greenColor;
+    $perc: ($i+1)*10;
+    background-color: transparentize($col, $i/6);
+    width: $randomWidthGreen;
+    &:after {
+      content: '#{$i}';
+    }
+    &:hover {
+      background-color: saturate($col, $perc);
+    }
+  }
+}
+@mixin buttonStyle ($button_size: 100px, $button_color: yellow, $font_size: 12) {
+  color: complement($button_color);
+  background-color: $button_color;
+  border: 2px solid grey;
+  width: $button_size;
+  height: $button_size * 0.25;
+  font-size: $font_size +'px';
+}
+
+@for $i from 1 through 3 {
+  $b-class: 'btn-#{$i}';
+  $b-font: #{12*($i)};
+  .#{$b-class}{
+    $newColor: desaturate(blue, 100/($i+2));
+    @include buttonStyle(($i+1)*100px, $newColor, $b-font);
+  }
+}
